@@ -10,15 +10,6 @@ export const AppRoute = () => {
        <Switch>
          <Route exact={true} path="/" component={Home} />
          <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
-         <Route path="/sub" component={SubPage} />
        </Switch>
   </HashRouter>,
   </>
