@@ -17,6 +17,8 @@ export const AppRoute = () => {
          <Route path="/sub" component={SubPage} />
          <Route path="/sub" component={SubPage} />
          <Route path="/sub" component={SubPage} />
+         <Route path="/sub" component={SubPage} />
+         <Route path="/sub" component={SubPage} />
        </Switch>
   </HashRouter>,
   </>
