@@ -1,7 +1,7 @@
 #!/bin/sh
 
-CLONE_DIR=/Users/kimuramotoyuki/my_react_setup
- 
+CLONE_DIR=$(cd $(dirname $0);pwd)
+
 # setup npm
 touch package.json
 cat $CLONE_DIR/output/package.json > ./package.json
