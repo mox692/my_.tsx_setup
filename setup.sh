@@ -1,24 +1,25 @@
 #!/bin/sh
 
+CLONE_DIR=$(cd $(dirname $0);pwd)
 
-# create package.json
+# setup npm
 touch package.json
-
-echo \{$'\n'\ \ \"name\":\ \"monikatsu_front\",$'\n'\ \ \"version\":\ \"0.0.1\",$'\n'\ \ \"description\":\ \"monikatsu_front\",$'\n'\ \ \"main\":\ \"index.js\",$'\n'\ \ \"scripts\":\ \{$'\n'\ \ \ \ \"start\":\ \"webpack-dev-server\ \ --mode\ development\ --inline\ --hot\ --open\",$'\n'\ \ \ \ \"build\":\ \"webpack\ \ --mode\ development\",$'\n'\ \ \ \ \"lint\":\ \"prettier\ --check\ .\",$'\n'\ \ \ \ \"fmt\":\ \"prettier\ --write\ .\"$'\n'\ \ \},$'\n'\ \ \"repository\":\ \{$'\n'\ \ \ \ \"type\":\ \"git\",$'\n'\ \ \ \ \"url\":\ \"git+https://github.com/mox692/monikatsu_front.git\"$'\n'\ \ \},$'\n'\ \ \"author\":\ \"\",$'\n'\ \ \"license\":\ \"MIT\",$'\n'\ \ \"bugs\":\ \{$'\n'\ \ \ \ \"url\":\ \"https://github.com/mox692/monikatsu_front/issues\"$'\n'\ \ \},$'\n'\ \ \"devDependencies\":\ \{$'\n'\ \ \ \ \"@babel/cli\":\ \"\^7.10.5\",$'\n'\ \ \ \ \"@babel/core\":\ \"\^7.10.5\",$'\n'\ \ \ \ \"@babel/polyfill\":\ \"\^7.10.4\",$'\n'\ \ \ \ \"@babel/preset-env\":\ \"\^7.10.4\",$'\n'\ \ \ \ \"@material-ui/core\":\ \"\^4.11.2\",$'\n'\ \ \ \ \"@material-ui/icons\":\ \"\^4.11.2\",$'\n'\ \ \ \ \"@types/node\":\ \"\^14.14.10\",$'\n'\ \ \ \ \"@types/react\":\ \"\^16.9.43\",$'\n'\ \ \ \ \"@types/react-dom\":\ \"\^16.9.8\",$'\n'\ \ \ \ \"@types/react-router-dom\":\ \"\^5.1.6\",$'\n'\ \ \ \ \"awesome-typescript-loader\":\ \"\^5.2.1\",$'\n'\ \ \ \ \"babel-loader\":\ \"\^8.1.0\",$'\n'\ \ \ \ \"css-loader\":\ \"\^3.6.0\",$'\n'\ \ \ \ \"file-loader\":\ \"\^6.0.0\",$'\n'\ \ \ \ \"html-webpack-plugin\":\ \"\^4.3.0\",$'\n'\ \ \ \ \"mini-css-extract-plugin\":\ \"\^0.9.0\",$'\n'\ \ \ \ \"style-loader\":\ \"\^1.2.1\",$'\n'\ \ \ \ \"typescript\":\ \"\^3.9.7\",$'\n'\ \ \ \ \"url-loader\":\ \"\^4.1.0\",$'\n'\ \ \ \ \"webpack\":\ \"\^4.43.0\",$'\n'\ \ \ \ \"webpack-cli\":\ \"\^3.3.12\",$'\n'\ \ \ \ \"webpack-dev-server\":\ \"\^3.11.0\"$'\n'\ \ \},$'\n'\ \ \"dependencies\":\ \{$'\n'\ \ \ \ \"@material/react-ripple\":\ \"\^0.15.0\",$'\n'\ \ \ \ \"@material/ripple\":\ \"\^8.0.0\",$'\n'\ \ \ \ \"@material/top-app-bar\":\ \"\^8.0.0\",$'\n'\ \ \ \ \"axios\":\ \"\^0.21.0\",$'\n'\ \ \ \ \"prettier\":\ \"\^2.2.1\",$'\n'\ \ \ \ \"react\":\ \"\^16.13.1\",$'\n'\ \ \ \ \"react-dom\":\ \"\^16.13.1\",$'\n'\ \ \ \ \"react-router-dom\":\ \"\^5.2.0\"$'\n'\ \ \},$'\n'\ \ \"homepage\":\ \"https://github.com/mox692/monikatsu_front\#readme\"$'\n'\} > package.json
+cat $CLONE_DIR/output/package.json > ./package.json
 touch .gitignore && echo "node_modules \npackage-lock.json" > .gitignore
+
 
 mkdir src
 touch ./src/index.html
-echo \<\!DOCTYPE\ html\>$'\n'\<html\>$'\n'\ \ \<head\>$'\n'\ \ \ \ \<meta\ charset=\"utf-8\"\ /\>$'\n'\ \ \ \ \<title\>\</title\>$'\n'\ \ \</head\>$'\n'\ \ \<body\>$'\n'\ \ \ \ \<div\ class=\"well\"\>$'\n'\ \ \ \ \ \ \<h1\>Sample\ app\</h1\>$'\n'\ \ \ \ \ \ \<div\ id=\"root\"\>$'\n'\ \ \ \ \</div\>$'\n'\ \ \</body\>$'\n'\</html\> > ./src/index.html
+cat $CLONE_DIR/output/src/index.html > ./src/index.html
 
 touch ./webpack.config.js
-echo var\ HtmlWebpackPlugin\ =\ require\(\"html-webpack-plugin\"\)\;$'\n'var\ MiniCssExtractPlugin\ =\ require\(\"mini-css-extract-plugin\"\)\;$'\n'var\ webpack\ =\ require\(\"webpack\"\)\;$'\n'var\ path\ =\ require\(\"path\"\)\;$'\n'$'\n'var\ basePath\ =\ __dirname\;$'\n'$'\n'module.exports\ =\ \{$'\n'\ \ context:\ path.join\(basePath,\ \"src\"\),$'\n'\ \ resolve:\ \{$'\n'\ \ \ \ extensions:\ \[\".js\",\ \".ts\",\ \".tsx\",\ \".css\"\],$'\n'\ \ \},$'\n'\ \ entry:\ \[\"@babel/polyfill\",\ \"./index.tsx\"\],$'\n'$'\n'\ \ output:\ \{$'\n'\ \ \ \ path:\ path.join\(basePath,\ \"dist\"\),$'\n'\ \ \ \ filename:\ \"bundle.js\",$'\n'\ \ \},$'\n'\ \ devtool:\ \"source-map\",$'\n'\ \ devServer:\ \{$'\n'\ \ \ \ contentBase:\ \"./dist\",\ //\ Content\ base$'\n'\ \ \ \ inline:\ true,\ //\ Enable\ watch\ and\ live\ reload$'\n'\ \ \ \ host:\ \"localhost\",$'\n'\ \ \ \ port:\ 8081,$'\n'\ \ \ \ stats:\ \"errors-only\",$'\n'\ \ \},$'\n'\ \ module:\ \{$'\n'\ \ \ \ rules:\ \[$'\n'\ \ \ \ \ \ \{$'\n'\ \ \ \ \ \ \ \ test:\ /\\.\(ts\|tsx\)\$/,$'\n'\ \ \ \ \ \ \ \ exclude:\ /node_modules/,$'\n'\ \ \ \ \ \ \ \ loader:\ \"awesome-typescript-loader\",$'\n'\ \ \ \ \ \ \ \ options:\ \{$'\n'\ \ \ \ \ \ \ \ \ \ useBabel:\ true,$'\n'\ \ \ \ \ \ \ \ \ \ babelCore:\ \"@babel/core\",\ //\ needed\ for\ Babel\ v7$'\n'\ \ \ \ \ \ \ \ \},$'\n'\ \ \ \ \ \ \},$'\n'\ \ \ \ \ \ \{$'\n'\ \ \ \ \ \ \ \ test:\ /\\.css\$/,$'\n'\ \ \ \ \ \ \ \ use:\ \[MiniCssExtractPlugin.loader,\ \"css-loader\"\],$'\n'\ \ \ \ \ \ \ \ use:\ \[$'\n'\ \ \ \ \ \ \ \ \ \ MiniCssExtractPlugin.loader,$'\n'\ \ \ \ \ \ \ \ \ \ \{$'\n'\ \ \ \ \ \ \ \ \ \ \ \ loader:\ \"css-loader\",$'\n'\ \ \ \ \ \ \ \ \ \ \ \ options:\ \{$'\n'\ \ \ \ \ \ \ \ \ \ \ \ \ \ modules:\ \{$'\n'\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localIdentName:\ \"\[name\]__\[local\]___\[hash:base64:5\]\",$'\n'\ \ \ \ \ \ \ \ \ \ \ \ \ \ \},$'\n'\ \ \ \ \ \ \ \ \ \ \ \ \ \ localsConvention:\ \"camelCase\",$'\n'\ \ \ \ \ \ \ \ \ \ \ \ \},$'\n'\ \ \ \ \ \ \ \ \ \ \},$'\n'\ \ \ \ \ \ \ \ \],$'\n'\ \ \ \ \ \ \},$'\n'\ \ \ \ \ \ \{$'\n'\ \ \ \ \ \ \ \ test:\ /\\.\(png\|jpg\|gif\|svg\)\$/,$'\n'\ \ \ \ \ \ \ \ loader:\ \"file-loader\",$'\n'\ \ \ \ \ \ \ \ options:\ \{$'\n'\ \ \ \ \ \ \ \ \ \ name:\ \"assets/img/\[name\].\[ext\]\?\[hash\]\",$'\n'\ \ \ \ \ \ \ \ \},$'\n'\ \ \ \ \ \ \},$'\n'\ \ \ \ \],$'\n'\ \ \},$'\n'\ \ plugins:\ \[$'\n'\ \ \ \ //Generate\ index.html\ in\ /dist\ =\>\ https://github.com/ampedandwired/html-webpack-plugin$'\n'\ \ \ \ new\ HtmlWebpackPlugin\(\{$'\n'\ \ \ \ \ \ filename:\ \"index.html\",\ //Name\ of\ file\ in\ ./dist/$'\n'\ \ \ \ \ \ template:\ \"index.html\",\ //Name\ of\ template\ in\ ./src$'\n'\ \ \ \ \ \ hash:\ true,$'\n'\ \ \ \ \}\),$'\n'\ \ \ \ new\ MiniCssExtractPlugin\(\{$'\n'\ \ \ \ \ \ filename:\ \"\[name\].css\",$'\n'\ \ \ \ \ \ chunkFilename:\ \"\[id\].css\",$'\n'\ \ \ \ \}\),$'\n'\ \ \],$'\n'\}\;$'\n' > webpack.config.js
+cat $CLONE_DIR/output/webpack.config.js > ./webpack.config.js
 
 touch ./.babelrc
-echo \{$'\n'\ \ \"presets\":\ \[$'\n'\ \ \ \ \[$'\n'\ \ \ \ \ \ \"@babel/preset-env\",$'\n'\ \ \ \ \ \ \{$'\n'\ \ \ \ \ \ \ \ \"useBuiltIns\":\ \"entry\"$'\n'\ \ \ \ \ \ \}$'\n'\ \ \ \ \]$'\n'\ \ \]$'\n'\}$'\n' > ./.babelrc
+cat $CLONE_DIR/output/.babelrc > ./.babelrc
 
 touch ./tsconfig.json
-echo \{$'\n'\ \ \"compilerOptions\":\ \{$'\n'\ \ \ \ \"target\":\ \"es6\",$'\n'\ \ \ \ \"module\":\ \"es6\",$'\n'\ \ \ \ \"moduleResolution\":\ \"node\",$'\n'\ \ \ \ \"declaration\":\ false,$'\n'\ \ \ \ \"noImplicitAny\":\ false,$'\n'\ \ \ \ \"jsx\":\ \"react\",$'\n'\ \ \ \ \"sourceMap\":\ true,$'\n'\ \ \ \ \"allowSyntheticDefaultImports\":\ true,$'\n'\ \ \ \ \"noLib\":\ false,$'\n'\ \ \ \ \"suppressImplicitAnyIndexErrors\":\ true,$'\n'\ \ \ \ \"esModuleInterop\":\ true\ //\ これを追加$'\n'\ \ \},$'\n'\ \ \"compileOnSave\":\ false,$'\n'\ \ \"exclude\":\ \[\"node_modules\"\]$'\n'\}$'\n' > tsconfig.json
+cat $CLONE_DIR/output/tsconfig.json > ./tsconfig.json
 
 # setup react
 npm install
@@ -26,7 +27,7 @@ touch ./src/index.tsx
 touch ./src/app.tsx
 touch ./src/home.tsx
 touch ./src/subpage.tsx
-echo import\ \*\ as\ React\ from\ \"react\"\;$'\n'import\ \*\ as\ ReactDOM\ from\ \"react-dom\"\;$'\n'$'\n'import\ \{\ AppRoute\ \}\ from\ \"./app\"\;$'\n'$'\n'ReactDOM.render\(\<AppRoute\ /\>,\ document.getElementById\(\"root\"\)\)\;$'\n' > ./src/index.tsx
-echo import\ \*\ as\ React\ from\ \"react\"\;$'\n'import\ \{\ HashRouter,\ Switch,\ Route\ \}\ from\ \"react-router-dom\"\;$'\n'import\ \{\ Home\ \}\ from\ \"./home\"$'\n'import\ \{\ SubPage\ \}\ from\ \"./subpage\"$'\n'$'\n'export\ const\ AppRoute\ =\ \(\)\ =\>\ \{$'\n'$'\n'\ \ return\ \<\>$'\n'\ \ \<HashRouter\>$'\n'\ \ \ \ \ \ \ \<Switch\>$'\n'\ \ \ \ \ \ \ \ \ \<Route\ exact=\{true\}\ path=\"/\"\ component=\{Home\}\ /\>$'\n'\ \ \ \ \ \ \ \ \ \<Route\ path=\"/sub\"\ component=\{SubPage\}\ /\>$'\n'\ \ \ \ \ \ \ \</Switch\>$'\n'\ \ \</HashRouter\>,$'\n'\ \ \</\>$'\n'\}\; > ./src/app.tsx
-echo import\ \*\ as\ React\ from\ \"react\"\;$'\n'import\ \{\ Link\ \}\ from\ \"react-router-dom\"$'\n'$'\n'export\ const\ Home\ =\ \(\)\ =\>\ \{$'\n'\ \ \ \ return\ \<\>$'\n'\ \ \ \ \ \ \ \ \<h2\>this\ is\ home\ page\ \!\</h2\>$'\n'\ \ \ \ \ \ \ \ \<p\>\<Link\ to=\"/sub\"\>to\ subpage\</Link\>\</p\>$'\n'\ \ \ \ \</\>$'\n'\} > ./src/home.tsx
-echo import\ \*\ as\ React\ from\ \"react\"\;$'\n'import\ \{\ Link\ \}\ from\ \"react-router-dom\"$'\n'$'\n'export\ const\ SubPage\ =\ \(\)\ =\>\ \{$'\n'\ \ \ \ return\ \<\>$'\n'\ \ \ \ \ \ \ \ \<h2\>this\ is\ home\ sub\ \!\</h2\>$'\n'\ \ \ \ \ \ \ \ \<p\>\<Link\ to=\"/\"\>to\ homepage\</Link\>\</p\>$'\n'\ \ \ \ \</\>$'\n'\} > ./src/subpage.tsx
+cat $CLONE_DIR/output/src/index.tsx > ./src/index.tsx
+cat $CLONE_DIR/output/src/app.tsx > ./src/app.tsx
+cat $CLONE_DIR/output/src/home.tsx > ./src/home.tsx
+cat $CLONE_DIR/output/src/subpage.tsx > ./src/subpage.tsx
